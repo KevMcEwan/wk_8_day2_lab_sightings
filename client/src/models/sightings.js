@@ -12,7 +12,7 @@ Sightings.prototype.bindEvents = function () {
   });
   PubSub.subscribe('SightingView:sighting-submitted', (evt) => {
     this.postSighting(evt.detail);
-  })
+  });
   // subscribe when new one submitted
 };
 
@@ -25,10 +25,10 @@ Sightings.prototype.getData = function () {
 };
 
 Sightings.prototype.postSighting = function (sighting) {
-  const request = new RequestHelper(this.url);
-  request.post(sighting)
+  this.request.post(sighting)
   .then((sightings) => {
     PubSub.publish('Sightings:data-loaded', sightings);
+    console.log(sightings);
   })
   .catch(console.error);
 };
